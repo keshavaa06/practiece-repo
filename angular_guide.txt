@@ -1,0 +1,133 @@
+npm install -g @angular/cli
+ng new <project-name>
+cd <project-name>
+ng serve --open
+
+component : each component contains one functionality (login,logout..)
+module : contains multiple components
+
+files & folders in Angular: 
+----------------------------------
+package.json (f)
+node_modules (F)
+src (F)
+	app (F)
+	assests (F)
+	environments (F) .. to build app in stag,prod,dev 
+	index.html (f) .. first page which gets loaded, it contains <app-root></app-root>
+	main.js (f) .. bridge b/w html & js 
+	style.css (f) .. globally styles the functionality
+
+
+
+app : 
+------------------------------------
+app.component.ts : contains all functions,variables and classes
+app.component.html : all UI tags
+app.component.css : styling for each individual functionality
+
+
+interpolation : 
+------------------------------------------------------
+{{}} : interpolation
+interpolation is used to display the dynamic data on the html page /webpage
+dynamic data : any property/function defined inside a component.ts file is dynamic data
+interpolation is used only in component.html file , we can'nt used it in component.ts file
+{{}} , inside it we can use properties/variables names or can call functions or mathematical/arithmetic operations
+
+angular cli : 
+--------------------------------------
+with angular cli we can create new classes, new interfaces,new routes,new components, new services and so on
+ng generate component <component-name>
+
+a new component is created inside app component, since app is a base/root component
+
+whenever a new component is created it must be registered in app module
+
+in every new component we have component.html,component.css,component.ts,component.spec.ts files , i.e in total 4 files
+in the component.html we can define the html code and it has to be rendered in app component's app.component.html file as <app-componentname></app-componentname>
+to check the tag name , go to selector in component.ts file 
+
+inline-style and inline-template
+module : contains components, service,pips,API call,helpers,classes and interfaces
+
+to declare a component inside a module 	we must go to component.ts file , inside it go to declarations:[]
+to import a module inside a module we must go to component.ts file, inside it go to imports:[]
+
+
+when new components are created inside app component, they are used directly in app.component.html file as a tag like <component-name></component-name>
+when new module is created inside app component, it must be registered i.e imported in app.component.ts file 
+when a new component is created inside a new module, then it must be registered/exported from new module
+later the component it is used in app.component.html file as a tag like <component-name></component-name>
+
+component styling : for each component we have component.css , so this styling is limited to the component level itself
+global styling : use styles.css , this makes styling to all the components 
+internal styling : inside component.html , use <style></style> tag and make stylings
+inline styling : in the tag use style 
+
+interpolation : it works with string and numbers but not with booleans
+property binding : works with all types of data, and it is most recommended while assigning values to properties 
+properties like [value] = ,[disabled]= , properties are written in square brackets , and parameters are directly assigned to it
+in components.html we make Angular for loop and in components.ts file we make javascript for loop
+
+
+
+passing data from parent to child component:
+------------------------------------------------------
+parent component: app
+child component: login
+app.component.html : <app-login></app-login>
+app.component.ts : randomNumber = 5
+app.component.html : <app-login [number] = "randomNumber"> </app-login>
+now data passed from parent to child, but now this data to be handled in child
+login.component.ts : import{Input} from @angular/core
+@Input() number = 0 (we are zero, i.e a default value)
+login.component.html = <h3>{{number}}</h3>
+
+
+
+passing data from child to parent:
+-------------------------------------------------
+
+app.component.ts : create a function(getUser(name)) with one parameter and use console.warn to print name
+app.component.html : <app-child (childToParentEvent) = "getUser($event)"> </app-child>
+child.component.ts : import{Output,EventEmitter} from @angular/core
+@Output childToParentEvent = new EventEmitter<string>() , here <string> is the return type 
+child.component.html : <input type="text" #username />
+<button (click)="childToParentEvent.emit(username.value)"></button>
+app.component.ts : username = '' 
+getUser(name){
+console.warn(name)
+this.username = username
+}
+app.component.html : <h3>{{username}}</h3>
+
+
+
+two way binding:
+-------------------------
+to update and print the data simultaneously
+app.component.html: <input type="text" [(ngModel)]="productName"/>
+app.component.ts: productName:any
+app.module.ts : imports:[{FormsModule}]
+
+this is used, while entering data into input field, simultaneously it is printed in the bottom, along with the changes
+
+templete reference variable:
+-------------------------------------------
+
+<input type="text" #btn />
+#btn is a templete reference variable
+
+
+
+
+
+
+
+
+
+
+
+
+
