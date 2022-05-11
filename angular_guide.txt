@@ -120,6 +120,8 @@ templete reference variable:
 #btn is a templete reference variable
 
 
+11-05=2022 is the current date
+
 
 
 
